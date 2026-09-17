@@ -2,26 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+:root { color-scheme: dark; }
+html { scroll-behavior: smooth; }
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #0a0a0f;
+  color: #ededf2;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: #6d5ef6; color: #fff; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb { background: #23232e; border-radius: 999px; border: 3px solid #0a0a0f; }
+
+@layer components {
+  .eyebrow { @apply font-sans text-[11px] uppercase tracking-luxe text-iris-light; }
+  .accent-text {
+    background: linear-gradient(100deg, #9c8cff, #22d3ee);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .accent-rule {
+    height: 1px;
+    background-image: linear-gradient(90deg, transparent, #6d5ef6 30%, #22d3ee 70%, transparent);
+  }
+  .glass {
+    background: rgba(20, 20, 28, 0.6);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(35, 35, 46, 0.9);
+  }
+  .card { @apply rounded-2xl border border-ink-line bg-ink-card; }
+  .btn { @apply relative inline-flex items-center justify-center gap-2 font-sans text-[13px] font-medium transition-all duration-300; }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* faint dotted grid backdrop */
+.grid-bg::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(109,94,246,0.10) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
 }

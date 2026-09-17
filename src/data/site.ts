@@ -10,7 +10,7 @@ export const identity = {
   // one-liner aimed at GLOBAL clients
   tagline: "I build premium websites, online stores & AI automations that turn visitors into customers.",
   location: "India · working with clients worldwide",
-  email: "devanshu112raturi@gmail.com",
+  email: "devanshu007raturi@gmail.com",
   calendly: "#", // TODO: paste Calendly link
   github: "https://github.com/devu23",
   linkedin: "https://www.linkedin.com/in/devanshu-raturi-98a254233/",

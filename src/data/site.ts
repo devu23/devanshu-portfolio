@@ -11,7 +11,7 @@ export const identity = {
   tagline: "I build premium websites, online stores & AI automations that turn visitors into customers.",
   location: "India · working with clients worldwide",
   email: "devanshu007raturi@gmail.com",
-  calendly: "#", // TODO: paste Calendly link
+  calendly: "mailto:devanshu007raturi@gmail.com?subject=Let%27s%20set%20up%20a%20call", // TODO: swap for real Calendly link when created
   github: "https://github.com/devu23",
   linkedin: "https://www.linkedin.com/in/devanshu-raturi-98a254233/",
   photo: "/img/devanshuprofile2.JPG",

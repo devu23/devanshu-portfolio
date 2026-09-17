@@ -114,10 +114,10 @@ export const projects: Project[] = [
     tag: "E-commerce",
     blurb: "A premium ethnic-wear storefront — product pages, cart, live sale system, 3D hero. Built in ~2 days.",
     stack: ["Next.js", "Three.js", "Framer Motion"],
-    href: "#", // password-gated demo — add link when ready
-    hrefLabel: "Private demo (on request)",
+    href: "https://nextjs-ethnic-ecommerce-demo.vercel.app",
+    hrefLabel: "Visit live demo",
     preview: "/img/rivaayat.png",
-    note: "Prototype",
+    note: "Concept demo",
     from: "#7A2438",
     to: "#22D3EE",
   },

@@ -116,6 +116,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "Three.js", "Framer Motion"],
     href: "#", // password-gated demo — add link when ready
     hrefLabel: "Private demo (on request)",
+    preview: "/img/rivaayat.png",
     note: "Prototype",
     from: "#7A2438",
     to: "#22D3EE",

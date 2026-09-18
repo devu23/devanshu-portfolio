@@ -99,6 +99,16 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: "Neev",
+    tag: "AI Automation Agency",
+    blurb: "My automation agency — a 3D reactive particle hero, cinematic scroll scenes, and a live AI chat demo. Automation-first, full-stack services.",
+    stack: ["Next.js", "React Three Fiber", "GSAP"],
+    preview: "/img/neev.webp",
+    note: "My agency",
+    from: "#0FA66E",
+    to: "#12B5A6",
+  },
+  {
     name: "ProposalForYou",
     tag: "Live SaaS",
     blurb: "A live SaaS with Razorpay payments, free + paid plans, and 149 passing tests. Real, paid product.",

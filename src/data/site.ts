@@ -105,7 +105,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "React Three Fiber", "GSAP"],
     href: "https://neev-automation.vercel.app",
     hrefLabel: "Visit live site",
-    note: "My agency",
+    preview: "/img/neev.png",
     from: "#0FA66E",
     to: "#12B5A6",
   },

@@ -48,7 +48,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <a
             href="#contact"
-            className="btn rounded-full bg-iris-cyan px-5 py-2.5 text-ink hover:opacity-90"
+            className="btn hidden rounded-full bg-iris-cyan px-5 py-2.5 text-ink hover:opacity-90 sm:inline-flex"
           >
             Let&apos;s talk
           </a>

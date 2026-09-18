@@ -4,6 +4,10 @@
 
 :root { color-scheme: dark; }
 html { scroll-behavior: smooth; }
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
 body {
   background: #0a0a0f;
   color: #ededf2;

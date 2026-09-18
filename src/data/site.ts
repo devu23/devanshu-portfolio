@@ -103,7 +103,8 @@ export const projects: Project[] = [
     tag: "AI Automation Agency",
     blurb: "My automation agency — a 3D reactive particle hero, cinematic scroll scenes, and a live AI chat demo. Automation-first, full-stack services.",
     stack: ["Next.js", "React Three Fiber", "GSAP"],
-    preview: "/img/neev.webp",
+    href: "https://neev-automation.vercel.app",
+    hrefLabel: "Visit live site",
     note: "My agency",
     from: "#0FA66E",
     to: "#12B5A6",
@@ -130,16 +131,6 @@ export const projects: Project[] = [
     note: "Concept demo",
     from: "#7A2438",
     to: "#22D3EE",
-  },
-  // 🔲 SPACE LEFT — add real client projects here as they ship
-  {
-    name: "Your project here",
-    tag: "Available",
-    blurb: "The next spot is for your project. Websites, stores, dashboards — let's build it.",
-    stack: ["Next.js", "Shopify", "WordPress"],
-    from: "#14141C",
-    to: "#23232E",
-    note: "Open slot",
   },
 ];
 

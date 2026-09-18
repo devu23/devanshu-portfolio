@@ -10,7 +10,7 @@ export function Work() {
         <SectionHeading
           eyebrow="Selected work"
           title={<>Things I&apos;ve <span className="accent-text">shipped</span></>}
-          subtitle="Real, live products — not mockups. (Client work drops into the open slots next.)"
+          subtitle="Real, live products — not mockups."
         />
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -31,12 +31,7 @@ export function Work() {
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
-                    <>
-                      <span className="font-display text-2xl font-semibold text-white/85">{p.name}</span>
-                      <span className="absolute bottom-3 left-3 font-sans text-[10px] uppercase tracking-luxe text-white/70">
-                        preview coming
-                      </span>
-                    </>
+                    <span className="font-display text-3xl font-semibold text-white/90">{p.name}</span>
                   )}
                   {p.note && (
                     <span className="absolute right-3 top-3 rounded-full bg-ink/70 px-3 py-1 font-sans text-[10px] uppercase tracking-luxe text-fog">

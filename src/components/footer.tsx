@@ -22,8 +22,24 @@ export function Footer() {
         </ul>
 
         <div className="flex items-center gap-5">
-          <a href={identity.github} className="font-sans text-[12px] uppercase tracking-luxe text-fog-dim hover:text-cyan">GitHub</a>
-          <a href={identity.linkedin} className="font-sans text-[12px] uppercase tracking-luxe text-fog-dim hover:text-cyan">LinkedIn</a>
+          <a
+            href={identity.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor-text="GIT"
+            className="font-sans text-[12px] uppercase tracking-luxe text-fog-dim hover:text-cyan"
+          >
+            GitHub
+          </a>
+          <a
+            href={identity.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor-text="IN"
+            className="font-sans text-[12px] uppercase tracking-luxe text-fog-dim hover:text-cyan"
+          >
+            LinkedIn
+          </a>
         </div>
       </div>
       <div className="border-t border-ink-line py-4">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { CustomCursor } from "@/components/cursor";
 import { identity } from "@/data/site";
 
 const display = Space_Grotesk({
@@ -25,7 +26,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body className="grid-bg font-sans antialiased">
+      <body className="grid-bg font-sans antialiased selection:bg-cyan/30 selection:text-white">
+        <CustomCursor />
         <SmoothScroll />
         {children}
       </body>

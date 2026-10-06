@@ -149,7 +149,7 @@ export function Hero() {
               className="mt-12 flex flex-wrap items-center gap-6 border-t border-ink-line/60 pt-6 text-fog-dim"
             >
               <div className="flex items-center gap-2 font-sans text-xs">
-                <span className="text-cyan">◆</span> 4+ Yrs Shipping Software
+                <span className="text-cyan">◆</span> 3+ Yrs Shipping Software
               </div>
               <div className="flex items-center gap-2 font-sans text-xs">
                 <span className="text-iris-light">◆</span> Next.js · MERN · WebGL

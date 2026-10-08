@@ -103,7 +103,7 @@ export const projects: Project[] = [
     tag: "AI Automation Agency",
     blurb: "My automation agency — a 3D reactive particle hero, cinematic scroll scenes, and a live AI chat demo. Automation-first, full-stack services.",
     stack: ["Next.js", "React Three Fiber", "GSAP"],
-    href: "https://neev-automation.vercel.app",
+    href: "https://www.neevautomation.com",
     hrefLabel: "Visit live site",
     preview: "/img/neev.png",
     from: "#0FA66E",

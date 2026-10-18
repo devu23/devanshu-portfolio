@@ -1,12 +1,12 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
-import { Marquee } from "@/components/marquee";
-import { Services } from "@/components/services";
+import { Statement } from "@/components/statement";
 import { Work } from "@/components/work";
+import { Services } from "@/components/services";
 import { About } from "@/components/about";
-import { Process } from "@/components/process";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
+import { RevealObserver } from "@/components/reveal";
 
 export default function Home() {
   return (
@@ -14,14 +14,14 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee />
-        <Services />
+        <Statement />
         <Work />
+        <Services />
         <About />
-        <Process />
         <Contact />
       </main>
       <Footer />
+      <RevealObserver />
     </>
   );
 }

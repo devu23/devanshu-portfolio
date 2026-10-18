@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# unblurred employer screenshots — local only, never commit
+/public/img/powertech/

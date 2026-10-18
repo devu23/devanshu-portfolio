@@ -1,52 +1,30 @@
 import { identity, nav } from "@/data/site";
 
+/** Giant cropped wordmark as the sign-off. */
 export function Footer() {
   return (
-    <footer className="border-t border-ink-line bg-ink-soft">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-5 py-10 lg:flex-row lg:px-8">
-        <div className="text-center lg:text-left">
-          <p className="font-display text-lg font-semibold text-fog">{identity.name}</p>
-          <p className="mt-0.5 font-sans text-[11px] uppercase tracking-luxe text-iris-light">
-            {identity.company}
-          </p>
-        </div>
-
-        <ul className="flex flex-wrap items-center justify-center gap-6">
+    <footer className="overflow-hidden border-t border-line pt-14">
+      <div className="wrap flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-[0.875rem] text-ink-mute">
+          © {new Date().getFullYear()} {identity.name} · {identity.company}
+        </p>
+        <ul className="flex flex-wrap gap-6">
           {nav.map((n) => (
             <li key={n.label}>
-              <a href={n.href} className="font-sans text-[12px] uppercase tracking-luxe text-fog-dim hover:text-fog">
-                {n.label}
-              </a>
+              <a href={n.href} className="label hover:text-ink">{n.label}</a>
             </li>
           ))}
+          <li>
+            <a href="#top" className="label hover:text-accent">Back to top ↑</a>
+          </li>
         </ul>
-
-        <div className="flex items-center gap-5">
-          <a
-            href={identity.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor-text="GIT"
-            className="font-sans text-[12px] uppercase tracking-luxe text-fog-dim hover:text-cyan"
-          >
-            GitHub
-          </a>
-          <a
-            href={identity.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor-text="IN"
-            className="font-sans text-[12px] uppercase tracking-luxe text-fog-dim hover:text-cyan"
-          >
-            LinkedIn
-          </a>
-        </div>
       </div>
-      <div className="border-t border-ink-line py-4">
-        <p className="text-center font-sans text-[11px] uppercase tracking-luxe text-fog-dim">
-          © {new Date().getFullYear()} {identity.name} · Built with Next.js
-        </p>
-      </div>
+      <p
+        aria-hidden
+        className="wrap mt-10 select-none whitespace-nowrap font-black uppercase leading-[0.72] tracking-tightest text-canvas-card [font-size:clamp(3rem,16vw,13.5rem)] translate-y-[0.12em]"
+      >
+        {identity.first}
+      </p>
     </footer>
   );
 }

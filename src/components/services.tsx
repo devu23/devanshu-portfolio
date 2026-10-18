@@ -1,70 +1,77 @@
 "use client";
 
+import { useState } from "react";
 import { services } from "@/data/site";
-import { SectionHeading } from "./section-heading";
-import { Reveal } from "./reveal";
+import { cn } from "@/lib/utils";
 
+/**
+ * Accordion. Height animates with the grid-rows 0fr → 1fr trick (no JS measuring).
+ * Real <button aria-expanded> so keyboard + screen readers work.
+ */
 export function Services() {
+  const [open, setOpen] = useState(0);
+
   return (
-    <section id="services" className="relative py-28 lg:py-36 overflow-hidden">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <SectionHeading
-          eyebrow="Core Competencies &amp; Capabilities"
-          title={
-            <>
-              High-Value Systems That <span className="accent-text">Generate Revenue</span>
-            </>
-          }
-          subtitle="From 3D interactive web experiences to custom e-commerce stores and autonomous WhatsApp AI agents."
-        />
-
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((s, i) => (
-            <Reveal key={s.title} i={i}>
-              <div
-                data-cursor-text="SERVICE"
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-ink-line bg-ink-card p-7 transition-all duration-500 hover:-translate-y-2 hover:border-cyan/50 hover:shadow-[0_15px_35px_rgba(34,211,238,0.12)]"
-              >
-                {/* Glow Hover Backing */}
-                <div
-                  className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
-                  style={{ background: s.from }}
-                />
-
-                <div>
-                  <div
-                    className="flex h-12 w-12 items-center justify-center rounded-2xl text-xl text-ink font-bold shadow-md transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: `linear-gradient(135deg, ${s.from}, ${s.to})` }}
-                  >
-                    {s.icon}
-                  </div>
-                  <h3 className="mt-6 font-display text-lg font-bold text-fog group-hover:text-cyan-light transition-colors">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2.5 font-sans text-[13.5px] leading-relaxed text-fog-muted">
-                    {s.desc}
-                  </p>
-                </div>
-
-                <ul className="mt-6 space-y-2 border-t border-ink-line/50 pt-5">
-                  {s.points.map((p) => (
-                    <li key={p} className="flex items-center gap-2 font-sans text-[12px] text-fog-dim">
-                      <span className="text-cyan">▸</span> {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
+    <section id="services" className="border-t border-line py-24 sm:py-32">
+      <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.35fr] lg:gap-20">
+        <div data-reveal>
+          <span className="label">Services</span>
+          <h2 className="mt-5 text-[clamp(2.4rem,5vw,4.6rem)] font-black uppercase leading-[0.88] tracking-tightest">
+            What I can <span className="font-serif font-normal normal-case italic tracking-[-0.02em] text-accent">build</span> for you
+          </h2>
+          <p className="mt-6 max-w-sm text-[1rem] leading-relaxed text-ink-mute">
+            A first website, a better store, or a system that answers your leads. Pick the problem; I pick the right stack.
+          </p>
         </div>
 
-        <Reveal i={2}>
-          <div className="mt-12 rounded-2xl border border-ink-line/60 bg-ink-soft/40 p-4 text-center backdrop-blur-sm">
-            <p className="font-sans text-[13px] text-fog-muted">
-              Need a bespoke stack? I architect custom full-stack solutions tailored to your unique workflow.
-            </p>
-          </div>
-        </Reveal>
+        <ul className="border-t border-line" data-reveal style={{ ["--d" as string]: "120ms" }}>
+          {services.map((s, i) => {
+            const isOpen = open === i;
+            return (
+              <li key={s.title} className="border-b border-line">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={`svc-${i}`}
+                  onClick={() => setOpen(isOpen ? -1 : i)}
+                  className="group flex w-full items-center gap-5 py-6 text-left"
+                >
+                  <span className="font-mono text-[0.75rem] text-accent">0{i + 1}</span>
+                  <span className="flex-1 text-[clamp(1.25rem,2.2vw,1.75rem)] font-semibold tracking-[-0.03em] transition-colors group-hover:text-accent">
+                    {s.title}
+                  </span>
+                  <span
+                    aria-hidden
+                    className={cn("relative h-4 w-4 transition-transform duration-500 ease-out", isOpen && "rotate-45")}
+                  >
+                    <span className="absolute left-0 top-1/2 h-px w-4 bg-ink" />
+                    <span className="absolute left-1/2 top-0 h-4 w-px bg-ink" />
+                  </span>
+                </button>
+                <div
+                  id={`svc-${i}`}
+                  className={cn(
+                    "grid transition-[grid-template-rows] duration-500 ease-out",
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  )}
+                >
+                  <div className="overflow-hidden">
+                    <div className="pb-7 pl-[2.6rem]">
+                      <p className="max-w-lg text-[0.9688rem] leading-relaxed text-ink-mute">{s.desc}</p>
+                      <ul className="mt-4 flex flex-wrap gap-2">
+                        {s.points.map((p) => (
+                          <li key={p} className="rounded-full border border-line px-3 py-1 text-[0.7812rem] text-ink">
+                            {p}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

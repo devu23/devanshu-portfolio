@@ -1,74 +1,89 @@
 "use client";
 
-import { useState } from "react";
-import { identity } from "@/data/site";
-import { Reveal } from "./reveal";
+import { useRef, useState } from "react";
+import { identity, bookingHref } from "@/data/site";
+import { MagLink, Arrow } from "./mag-link";
 
+/**
+ * Closing section: big line + a booking card.
+ * The card tilts max ~2° toward the mouse with a soft glow — small on purpose.
+ */
 export function Contact() {
+  const card = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(identity.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const tilt = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "mouse" || !card.current) return;
+    const r = card.current.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
+    card.current.style.transform = `perspective(1000px) rotateX(${(0.5 - y) * 4}deg) rotateY(${(x - 0.5) * 4}deg)`;
+    card.current.style.setProperty("--gx", `${x * 100}%`);
+    card.current.style.setProperty("--gy", `${y * 100}%`);
+  };
+  const reset = () => {
+    if (card.current) card.current.style.transform = "";
+  };
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(identity.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    } catch {
+      /* clipboard blocked — the mailto link still works */
+    }
   };
 
   return (
-    <section id="contact" className="relative py-28 lg:py-40 overflow-hidden">
-      {/* Background Ambient Aura */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-iris/20 via-cyan/20 to-iris/15 blur-[140px]" />
-
-      <div className="relative mx-auto max-w-4xl px-5 text-center lg:px-8">
-        <Reveal>
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan/30 bg-ink-soft/80 px-4 py-1.5 backdrop-blur-md">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan shadow-[0_0_8px_#22d3ee]" />
-            <span className="font-sans text-[11px] font-semibold uppercase tracking-widest text-cyan">
-              Initiate Project
-            </span>
-          </div>
-        </Reveal>
-
-        <Reveal i={1}>
-          <h2 className="mt-6 font-display text-4xl font-bold tracking-tight text-fog sm:text-6xl lg:text-7xl">
-            Have a project in mind? <br />
-            <span className="accent-text">Let&apos;s build it right.</span>
+    <section id="contact" className="border-t border-line py-24 sm:py-32">
+      <div className="wrap grid items-center gap-14 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
+        <div>
+          <span className="label" data-reveal>Contact</span>
+          <h2 className="mt-5 text-[clamp(3rem,8vw,7.5rem)] font-black uppercase leading-[0.84] tracking-tightest" data-reveal>
+            Let&apos;s build <br />
+            <span className="font-serif font-normal normal-case italic tracking-[-0.02em] text-accent">it right.</span>
           </h2>
-        </Reveal>
-
-        <Reveal i={2}>
-          <p className="mx-auto mt-6 max-w-xl font-sans text-[16px] leading-relaxed text-fog-muted">
-            Whether you need a high-converting 3D web experience, a custom online store, or an autonomous WhatsApp AI lead engine — I reply within 24 hours with an honest scope and roadmap.
+          <p className="mt-8 max-w-md text-[1.0312rem] leading-relaxed text-ink-mute" data-reveal>
+            One short call, a written plan within a day, then you see it being built.
           </p>
-        </Reveal>
+        </div>
 
-        <Reveal i={3}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href={`mailto:${identity.email}`}
-              data-cursor-text="EMAIL"
-              className="btn rounded-full bg-iris-cyan px-9 py-4 text-ink font-semibold shadow-[0_0_30px_rgba(34,211,238,0.4)] transition-all duration-300 hover:scale-[1.03] hover:opacity-95"
-            >
-              Email Devanshu
-            </a>
-            <button
-              onClick={copyEmail}
-              data-cursor-text="COPY"
-              className="btn rounded-full border border-ink-line bg-ink-soft/70 px-8 py-4 font-mono text-sm text-fog backdrop-blur-md transition-all hover:border-cyan hover:bg-cyan/10"
-            >
-              {copied ? "✓ Copied to Clipboard" : `Copy: ${identity.email}`}
-            </button>
+        <div data-reveal style={{ ["--d" as string]: "150ms" }}>
+          <div
+            ref={card}
+            onPointerMove={tilt}
+            onPointerLeave={reset}
+            className="relative overflow-hidden rounded-[12px] border border-line bg-canvas-raise p-6 transition-transform duration-300 ease-out sm:p-9"
+          >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-70"
+              style={{ background: "radial-gradient(420px circle at var(--gx,80%) var(--gy,0%), rgba(232,163,61,.14), transparent 70%)" }}
+            />
+            <div className="relative">
+              <p className="label text-accent">Book a call · 20 min</p>
+              <p className="mt-4 text-[clamp(1.6rem,3vw,2.3rem)] font-semibold leading-tight tracking-[-0.03em]">
+                Tell me what you&apos;re building. I&apos;ll reply within 24 hours.
+              </p>
+              <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink-mute">
+                The button opens a ready-to-send email. I reply with a time for a Google Meet.
+              </p>
+              <MagLink href={bookingHref} className="mt-8 w-full justify-between">
+                Book a call <Arrow />
+              </MagLink>
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5 text-[0.8438rem]">
+                <button type="button" onClick={copy} className="text-ink-mute transition-colors hover:text-ink">
+                  {copied ? "✓ Email copied" : identity.email}
+                </button>
+                <span className="flex gap-4">
+                  <a href={identity.linkedin} target="_blank" rel="noopener noreferrer" className="text-ink-mute hover:text-accent">LinkedIn</a>
+                  <a href={identity.github} target="_blank" rel="noopener noreferrer" className="text-ink-mute hover:text-accent">GitHub</a>
+                </span>
+              </div>
+            </div>
           </div>
-        </Reveal>
-
-        <Reveal i={4}>
-          <div className="mt-12 flex items-center justify-center gap-6 font-sans text-xs text-fog-dim">
-            <span>Direct: devanshu007raturi@gmail.com</span>
-            <span>•</span>
-            <span>Worldwide Delivery</span>
-            <span>•</span>
-            <span>Neev Automation</span>
-          </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

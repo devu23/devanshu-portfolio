@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
  */
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const photoRef = useRef<HTMLImageElement>(null);
   const [lit, setLit] = useState(false);
   const [flashing, setFlashing] = useState(false);
 
@@ -24,12 +25,6 @@ export function Hero() {
   const photoY = useTransform(scrollYProgress, [0, 1], [0, 40]);
   const nameY = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const nameOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
-  // Safety net: never leave the photo hidden if onLoad is missed.
-  useEffect(() => {
-    const t = setTimeout(() => setLit(true), 2500);
-    return () => clearTimeout(t);
-  }, []);
 
   const onPhotoLoad = (img: HTMLImageElement) => {
     const go = () =>
@@ -41,6 +36,14 @@ export function Hero() {
     if (img.decode) img.decode().then(go, go);
     else go();
   };
+
+  // The preloaded photo often finishes before React hydrates, so onLoad never fires — check on mount.
+  // Safety net: never leave the photo hidden if both are missed.
+  useEffect(() => {
+    if (photoRef.current?.complete) onPhotoLoad(photoRef.current);
+    const t = setTimeout(() => setLit(true), 2500);
+    return () => clearTimeout(t);
+  }, []);
 
   // Art direction: same alt, two crops. fill = positioned absolutely inside the motion.div.
   const common = { alt: `${identity.name}, portrait`, fill: true, priority: true, quality: 90 };
@@ -75,6 +78,7 @@ export function Hero() {
             {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
             <img
               {...tall}
+              ref={photoRef}
               onLoad={(e) => onPhotoLoad(e.currentTarget)}
               className={cn("hero-photo object-cover object-[50%_20%] lg:object-[70%_0%]", lit && "is-lit")}
             />
